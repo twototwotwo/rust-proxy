@@ -22,7 +22,7 @@ pub struct Proxy {
 impl Proxy {
     pub fn new() -> Proxy {
         Proxy {
-            ip : [127, 0, 0, 1],
+            ip : [0, 0, 0, 0],
             port : 8888
         }
     }
@@ -68,8 +68,7 @@ async fn handle(client: HttpClient, req: Request<Body>) -> Result<Response<Body>
         Ok(Response::new(Body::empty()))
     }else {
         let resp = client.request(req).await?;
-        Ok(Response::new(Body::from("aa")))
-
+        Ok(resp)
     }
 }
 
