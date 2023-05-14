@@ -55,7 +55,7 @@ async fn handle(client: HttpClient, req: Request<Body>) -> Result<Response<Body>
     if Method::CONNECT == req.method() {
         // Method::CONNECT indicates that req expect upgrade protocol
         // auth proxy
-        if proxy_auth(&req) {
+        if !proxy_auth(&req) {
             return Ok(Response::builder().status(403).body(Body::from("proxy auth fail")).unwrap());
         }
         if let Some(addr) = parse_host(req.uri()) {
